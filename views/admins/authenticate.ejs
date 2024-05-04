@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
+
+    <div class="applications">
+        <h2>All Applicants</h2>
+        <% if (applicants.length > 0) { %>
+            <ul>
+                <% applicants.forEach(applicant => { %>
+                    <li>
+                        <h3><%= applicant.username %></h3>
+                        <p>Email: <%= applicant.email %></p>
+                        <p>Reason: <%= applicant.reason %></p>
+                        <div class="action-buttons">
+                            <form action="/admins/authenticate/accept" method="POST" style="display:inline;">
+                                <input type="hidden" name="applicantID" value="<%= applicant._id %>">
+                                <button type="submit" class="accept-button">Accept</button>
+                            </form>
+                            <form action="/admins/authenticate/reject" method="POST" style="display:inline;">
+                                <input type="hidden" name="applicantID" value="<%= applicant._id %>">
+                                <button type="submit" class="reject-button">Reject</button>
+                            </form>
+                        </div>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No applicants found.</p>
+        <% } %>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

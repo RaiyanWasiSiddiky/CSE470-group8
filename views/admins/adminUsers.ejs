@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs') %>
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <h1>All Users</h1>
+    <ul>
+        <% users.forEach(user1 => { %>
+            <li>
+                <strong>Username:</strong> <%= user1.username %><br>
+                <strong>Email:</strong> <%= user1.email %><br>
+                <!-- Add any other user details you want to display -->
+
+                <!-- Button to delete user -->
+                <form id="deleteUserForm<%= user1._id %>" style="display:inline;">
+                    <button type="button" class="delete-user-button" onclick="deleteUser('<%= user1._id %>')">
+                        Delete User
+                    </button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+    <%- include('../partials/footer.ejs') %>
+
+    <script>
+        function deleteUser(userId) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                fetch(`/admins/${userId}/delete`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Reload the page or update the UI as needed
+                        location.reload();
+                    } else {
+                        // Handle errors
+                        console.error('Error deleting user');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

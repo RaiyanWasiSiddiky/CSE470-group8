@@ -7,7 +7,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const unlogRoutes = require('./routes/unlogRoutes');
 const path = require('path');
 
-
+// temp
 const app = express();
 
 const dbURI = 'mongodb+srv://User1:Wasi12345@competition.oxzypy3.mongodb.net/Competition?retryWrites=true&w=majority&appName=Competition'
